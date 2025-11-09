@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6ae7210c0e43aaf429ac17906e1777c8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bubbleBulletPrefab: {instanceID: 0}
+  - muzzlePoint: {instanceID: 0}
+  - muzzleFlash: {instanceID: 0}
+  - shootEffect: {instanceID: 0}
+  - muzzleLight: {instanceID: 0}
+  - shootSound: {instanceID: 0}
+  - emptyClickSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
