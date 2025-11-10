@@ -67,7 +67,7 @@ Material:
     - _ScrollZStrength: 0.07
     - _WaveSpeed: 1
     m_Colors:
-    - _Color: {r: 0.41512817, g: 0, b: 6.099195, a: 0.972549}
+    - _Color: {r: 4.015714, g: 0, b: 8.142904, a: 0.972549}
     - _Tiling: {r: 6, g: 3, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
