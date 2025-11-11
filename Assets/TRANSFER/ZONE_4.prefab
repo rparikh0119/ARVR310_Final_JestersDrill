@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 93876329080334848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6118603, y: 4.70671, z: 7.66624}
+  m_LocalPosition: {x: 1.6118605, y: 4.70671, z: 7.6662407}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -84,9 +84,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3915207841405219759}
-  - {fileID: 8768131791725694049}
-  - {fileID: 3532255888700858868}
   - {fileID: 4503972466302764517}
+  - {fileID: 8768131791725694049}
+  - {fileID: 344136944172672122}
+  - {fileID: 3532255888700858868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5539875322199140102
@@ -251,11 +252,11 @@ Transform:
   m_GameObject: {fileID: 6249500161503279711}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: -0.9023695, y: 1.8947076, z: 0.9306898}
-  m_LocalScale: {x: 0.40000004, y: 0.19999999, z: 0.40000004}
+  m_LocalPosition: {x: -0.783, y: 0.28200006, z: -0.50499725}
+  m_LocalScale: {x: 0.40000004, y: 0.19999999, z: 0.40000007}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8768131791725694049}
+  m_Father: {fileID: 4427485407528661614}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 45}
 --- !u!33 &3801888165209842977
 MeshFilter:
@@ -514,10 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6792110786374963770, guid: 3ee32983bd84a1f4b9b0b9041de355d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 344136944172672122}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2963108910478208212, guid: 3ee32983bd84a1f4b9b0b9041de355d4, type: 3}
       insertIndex: -1
@@ -574,6 +572,8 @@ MonoBehaviour:
   - {fileID: 7645824007598872175}
   swingAngle: 30
   swingSpeed: 1
+  rideAmbientSound: {fileID: 0}
+  audioVolume: 0.5
 --- !u!4 &1261104119224179711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3921670098951570852, guid: 3ee32983bd84a1f4b9b0b9041de355d4, type: 3}
@@ -939,9 +939,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandCrankController
   rotationsNeeded: 5
-  rotationThreshold: 30
   crankSound: {fileID: 0}
   completeSound: {fileID: 0}
+  crankSoundInterval: 0.3
   onCrankComplete:
     m_PersistentCalls:
       m_Calls:
