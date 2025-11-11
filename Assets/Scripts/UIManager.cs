@@ -9,12 +9,9 @@ public class WristUIManager : MonoBehaviour
     public GameObject weaponsPanel;
     public GameObject equipmentPanel;
     
-    [Header("Weapon Manager")]
+    [Header("Managers")]
     public WeaponManager weaponManager;
-    
-    [Header("Radio Audio")]
-    public AudioSource radioAudioSource;
-    public AudioClip sergeantBriggsWeaponInstructions;
+    public RadioManager radioManager; // NEW - Reference to RadioManager
     
     [Header("UI Sound")]
     public AudioSource uiAudioSource;
@@ -126,16 +123,16 @@ public class WristUIManager : MonoBehaviour
     
     // ===== EQUIPMENT TOGGLES =====
     
-    public void PlayRadioInstructions()
+    public void PlayRadioMessage()
     {
-        if (radioAudioSource != null && sergeantBriggsWeaponInstructions != null)
+        if (radioManager != null)
         {
-            radioAudioSource.PlayOneShot(sergeantBriggsWeaponInstructions);
-            Debug.Log("Playing Sergeant Briggs radio instructions");
+            radioManager.PlayNextBriggsMessage();
+            PlayButtonSound();
         }
         else
         {
-            Debug.LogError("Radio AudioSource or AudioClip missing!");
+            Debug.LogError("RadioManager reference missing!");
         }
     }
     
