@@ -4,21 +4,18 @@ using UnityEngine.InputSystem;
 
 public class BubbleGun : MonoBehaviour
 {
-    [Header("Gun Settings")]
+    [Header("Shooting")]
     public GameObject bubbleBulletPrefab;
     public Transform muzzlePoint;
     public float fireRate = 0.3f;
-    private float nextFireTime = 0f;
     
-    [Header("Visual Effects")]
+    [Header("Effects")]
     public ParticleSystem muzzleFlash;
-    public ParticleSystem shootEffect;
     public Light muzzleLight;
-    public float lightDuration = 0.1f;
+    public float lightDuration = 0.05f;
     
     [Header("Audio")]
     public AudioClip shootSound;
-    public AudioClip emptyClickSound;
     private AudioSource audioSource;
     
     [Header("Haptics")]
@@ -28,6 +25,7 @@ public class BubbleGun : MonoBehaviour
     [Header("Input")]
     public InputActionProperty activateAction;
     
+    private float nextFireTime;
     private UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor controllerInteractor;
     private bool wasTriggerPressed = false;
     
@@ -35,23 +33,24 @@ public class BubbleGun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
+        {
             audioSource = gameObject.AddComponent<AudioSource>();
-        
+        }
         audioSource.spatialBlend = 1f;
         
         if (muzzleLight != null)
+        {
             muzzleLight.enabled = false;
+        }
+        
+        StartCoroutine(FindControllerDelayed());
     }
     
     void OnEnable()
     {
-        // Only initialize if we're in play mode (not during scene load)
+        // Only enable if we're in play mode and action is valid
         if (!Application.isPlaying) return;
         
-        // Find the controller when weapon is equipped
-        StartCoroutine(FindControllerDelayed());
-        
-        // Enable the activate action (safely)
         try
         {
             if (activateAction.action != null)
@@ -67,7 +66,6 @@ public class BubbleGun : MonoBehaviour
     
     void OnDisable()
     {
-        // Disable the activate action
         if (activateAction.action != null)
         {
             activateAction.action.Disable();
@@ -76,31 +74,17 @@ public class BubbleGun : MonoBehaviour
     
     System.Collections.IEnumerator FindControllerDelayed()
     {
-        // Small delay to ensure parent hierarchy is set up
         yield return new WaitForSeconds(0.1f);
-        
-        // Look for controller in parent hierarchy
         controllerInteractor = GetComponentInParent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor>();
-        
-        if (controllerInteractor == null)
-        {
-            Debug.LogWarning("BubbleGun: Could not find XRBaseControllerInteractor in parent!");
-        }
-        else
-        {
-            Debug.Log("BubbleGun: Found controller, ready to shoot!");
-        }
     }
     
     void Update()
     {
-        // Check if trigger is pressed using Input Action
         if (activateAction.action != null)
         {
             float triggerValue = activateAction.action.ReadValue<float>();
-            bool isTriggerPressed = triggerValue > 0.1f; // Threshold for trigger press
+            bool isTriggerPressed = triggerValue > 0.1f;
             
-            // Detect when trigger was just pressed (transition from not pressed to pressed)
             if (isTriggerPressed && !wasTriggerPressed)
             {
                 Shoot();
@@ -112,62 +96,38 @@ public class BubbleGun : MonoBehaviour
     
     public void Shoot()
     {
-        // Check fire rate cooldown
-        if (Time.time < nextFireTime)
-        {
-            // Gun is still cooling down - play empty click
-            if (emptyClickSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(emptyClickSound);
-            }
-            return;
-        }
+        if (Time.time < nextFireTime) return;
         
-        // FIRE THE GUN
+        // SPAWN BULLET
         if (bubbleBulletPrefab != null && muzzlePoint != null)
         {
-            // Spawn bullet
-            GameObject bullet = Instantiate(bubbleBulletPrefab, 
-                                           muzzlePoint.position, 
-                                           muzzlePoint.rotation);
-            
-            Debug.Log("BubbleGun: Fired!");
+            GameObject bullet = Instantiate(bubbleBulletPrefab, muzzlePoint.position, muzzlePoint.rotation);
+            Debug.Log("✅ BUBBLE BULLET SPAWNED!");
         }
         else
         {
-            Debug.LogError("BubbleGun: Missing bubbleBulletPrefab or muzzlePoint!");
+            if (bubbleBulletPrefab == null) Debug.LogError("❌ BUBBLE BULLET PREFAB NOT ASSIGNED!");
+            if (muzzlePoint == null) Debug.LogError("❌ MUZZLE POINT NOT ASSIGNED!");
         }
         
-        // Play shoot sound
+        // Effects
         if (shootSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(shootSound);
         }
         
-        // Visual effects
-        if (muzzleFlash != null)
-        {
-            muzzleFlash.Play();
-        }
+        if (muzzleFlash != null) muzzleFlash.Play();
         
-        if (shootEffect != null)
-        {
-            shootEffect.Play();
-        }
-        
-        // Muzzle flash light
         if (muzzleLight != null)
         {
             StartCoroutine(FlashLight());
         }
         
-        // Haptic feedback
         if (controllerInteractor != null)
         {
             controllerInteractor.SendHapticImpulse(hapticIntensity, hapticDuration);
         }
         
-        // Set next fire time
         nextFireTime = Time.time + fireRate;
     }
     

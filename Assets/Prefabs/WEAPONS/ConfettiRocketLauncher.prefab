@@ -9844,7 +9844,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6923095797830690465}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1.441, y: 0.174, z: 40.676}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9855,7 +9855,7 @@ Transform:
   - {fileID: 3103767404631981909}
   - {fileID: 2637375247673367523}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &7359879114148196036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9868,7 +9868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434378e319d50ed4fb4db6536b2296ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ConfettiRocketLauncher
-  rocketPrefab: {fileID: 6940296668951997547}
+  rocketPrefab: {fileID: 8927165805502022778, guid: 23613a9b15f06a6488fbe60f4379dcc5, type: 3}
   muzzlePoint: {fileID: 8645306675993616776}
   rocketSpeed: 25
   fireRate: 1.2
@@ -10076,11 +10076,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8b2e8ff7b4a284408564521e00e72d1, type: 3}
---- !u!1 &6940296668951997547 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2057873186556838012, guid: c8b2e8ff7b4a284408564521e00e72d1, type: 3}
-  m_PrefabInstance: {fileID: 8998169850525281303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7717819148952516305 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1712731725520820934, guid: c8b2e8ff7b4a284408564521e00e72d1, type: 3}

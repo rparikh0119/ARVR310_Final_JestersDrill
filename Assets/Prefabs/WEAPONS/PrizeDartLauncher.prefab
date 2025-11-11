@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 932225043149962022}
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0.167, y: 0.157, z: -0.28499985}
+  m_LocalPosition: {x: 0.007321842, y: 0.157, z: -0.22698975}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4921,7 +4921,7 @@ Transform:
   m_GameObject: {fileID: 5098287709897755115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.171, y: 0.16, z: -0.3024}
+  m_LocalPosition: {x: 0.01132185, y: 0.16, z: -0.24438989}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5069,7 +5069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b01903de8e1fd42911a7dc800d51eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrizeDartLauncher
-  dartPrefab: {fileID: 6288694282186609578}
+  dartPrefab: {fileID: 7281404066118455025, guid: 215f6821574611e4a8bf8138f3cb76ac, type: 3}
   muzzlePoint: {fileID: 1679371719879532552}
   dartSpeed: 30
   fireRate: 0.4
@@ -5116,13 +5116,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8822918937077035741}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16253, y: 0.1583, z: -0.2944}
+  m_LocalRotation: {x: -0, y: 0.99995494, z: -0, w: 0.0094917}
+  m_LocalPosition: {x: 0.0028518494, y: 0.1583, z: -0.2363899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1679371719879532552}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 178.912, z: 0}
 --- !u!1001 &1508979597513037446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5137,7 +5137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150536593550938844, guid: 7e9214be09456ac409c332c93e28a101, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.16667815
+      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 4150536593550938844, guid: 7e9214be09456ac409c332c93e28a101, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5145,7 +5145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150536593550938844, guid: 7e9214be09456ac409c332c93e28a101, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000011444092
+      value: 0.058
       objectReference: {fileID: 0}
     - target: {fileID: 4150536593550938844, guid: 7e9214be09456ac409c332c93e28a101, type: 3}
       propertyPath: m_LocalRotation.w

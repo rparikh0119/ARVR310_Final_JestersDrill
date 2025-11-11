@@ -36,22 +36,24 @@ public class ConfettiRocketLauncher : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
+        {
             audioSource = gameObject.AddComponent<AudioSource>();
-        
+        }
         audioSource.spatialBlend = 1f;
         
         if (muzzleLight != null)
+        {
             muzzleLight.enabled = false;
+        }
+        
+        StartCoroutine(FindControllerDelayed());
     }
     
     void OnEnable()
     {
-        // Only initialize if we're in play mode (not during scene load)
+        // Only enable if we're in play mode and action is valid
         if (!Application.isPlaying) return;
         
-        StartCoroutine(FindControllerDelayed());
-        
-        // Enable the activate action (safely)
         try
         {
             if (activateAction.action != null)

@@ -314,6 +314,16 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &351099622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6205418261519494258, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
+  m_PrefabInstance: {fileID: 1478328443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &596049260 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6190091116014783116, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
+  m_PrefabInstance: {fileID: 1334944304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &790027765 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5404584951797154470, guid: 640ddc65dbd6e7b4fb4584221e60b6e3, type: 3}
@@ -589,9 +599,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4816572378127450529, guid: 47942ace582d3e544bd733c4bf86f7e4, type: 3}
+      propertyPath: weaponAttachPoint
+      value: 
+      objectReference: {fileID: 596049260}
     - target: {fileID: 9044607134277113056, guid: 47942ace582d3e544bd733c4bf86f7e4, type: 3}
       propertyPath: m_Name
-      value: WeaponManager (1)
+      value: 'WeaponManager '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -853,6 +867,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowWeaponsPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3116526642873004035, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3866459622240380645, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -945,10 +963,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ShowEquipmentPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3116526642873004035, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6205418261519494258, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1592907933}
   m_SourcePrefab: {fileID: 100100000, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
 --- !u!1 &1478328444 stripped
 GameObject:
@@ -975,6 +997,25 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1119806304620149419, guid: 4d40255537972a84b9cb682dbf07b7d7, type: 3}
   m_PrefabInstance: {fileID: 1478328443}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1592907933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351099622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.UI.TrackedDeviceGraphicRaycaster
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!4 &1671665167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 302137970947634246, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}

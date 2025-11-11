@@ -2,124 +2,103 @@ using UnityEngine;
 
 public class ConfettiRocketProjectile : MonoBehaviour
 {
+    [Header("Movement")]
+    public float speed = 25f;
+    public float lifetime = 5f;
+    
     [Header("Rocket Settings")]
-    public float explosionDelay = 2f; // Time before explosion
-    public float launchForce = 15f; // How hard enemy is launched
-    public LayerMask hitLayers;
+    public float explosionDelay = 0.5f; // Time before explosion after hit
+    public float launchForce = 15f; // How high enemy flies
+    public LayerMask enemyLayer; // Set to "Enemy" layer
     
     [Header("Visual Effects")]
-    public ParticleSystem rocketTrail; // Trail while flying
-    public GameObject explosionEffect; // Big confetti explosion
+    public ParticleSystem rocketTrail;
+    public GameObject explosionEffect;
     
-    [Header("Audio")]
-    public AudioClip hitSound; // When rocket hits
-    public AudioClip explosionSound; // When rocket explodes
-    public AudioClip rocketFlySound; // Looping while flying
-    private AudioSource audioSource;
-    
+    private Vector3 velocity;
     private bool hasHit = false;
     private GameObject attachedEnemy;
     
     void Start()
     {
-        // Add audio source for flying sound
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.spatialBlend = 1f;
-        audioSource.loop = true;
+        // Calculate velocity from forward direction
+        velocity = transform.forward * speed;
         
-        if (rocketFlySound != null)
+        // Auto-destroy after lifetime
+        Destroy(gameObject, lifetime);
+        
+        Debug.Log($"Rocket spawned! Moving forward at speed: {speed}");
+    }
+    
+    void Update()
+    {
+        if (!hasHit)
         {
-            audioSource.clip = rocketFlySound;
-            audioSource.Play();
+            // Move forward
+            transform.position += velocity * Time.deltaTime;
+            
+            // Rotate for spin effect
+            transform.Rotate(Vector3.forward, 360f * Time.deltaTime);
         }
-        
-        // Destroy rocket after 5 seconds if it doesn't hit anything
-        Destroy(gameObject, 5f);
     }
     
     void OnTriggerEnter(Collider other)
     {
         if (hasHit) return;
         
-        // Check if we hit something on the correct layers
-        if (((1 << other.gameObject.layer) & hitLayers) != 0)
+        // Check if hit Enemy layer
+        if (((1 << other.gameObject.layer) & enemyLayer) == 0)
         {
-            hasHit = true;
-            
-            // Stop flying sound
-            if (audioSource != null)
-            {
-                audioSource.Stop();
-            }
-            
-            // Play hit sound
-            if (hitSound != null)
-            {
-                AudioSource.PlayClipAtPoint(hitSound, transform.position);
-            }
-            
-            // Check if this is an enemy
-            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            {
-                AttachToEnemy(other.gameObject);
-            }
-            else
-            {
-                // Hit a wall or ground - explode immediately
-                Explode(null);
-            }
+            // Not an enemy - ignore
+            return;
         }
+        
+        hasHit = true;
+        
+        Debug.Log($"Rocket hit enemy: {other.gameObject.name}");
+        
+        // Attach to enemy and launch them
+        AttachToEnemy(other.gameObject);
     }
     
     void AttachToEnemy(GameObject enemy)
     {
         attachedEnemy = enemy;
         
-        // Stop rocket physics
-        Rigidbody rocketRb = GetComponent<Rigidbody>();
-        if (rocketRb != null)
-        {
-            rocketRb.isKinematic = true;
-            rocketRb.linearVelocity = Vector3.zero;
-        }
+        // Stop rocket movement
+        velocity = Vector3.zero;
         
         // Attach rocket to enemy
         transform.SetParent(enemy.transform);
         
-        // LAUNCH THE ENEMY
+        // Launch enemy upward with spin
         Rigidbody enemyRb = enemy.GetComponent<Rigidbody>();
         if (enemyRb != null)
         {
-            enemyRb.isKinematic = false; // Make sure physics works
+            enemyRb.isKinematic = false;
             enemyRb.useGravity = true;
             
-            // Launch upward and in the direction rocket was traveling
+            // Launch UP and slightly forward
             Vector3 launchDirection = (Vector3.up * 1.5f + transform.forward).normalized;
             enemyRb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
             
-            // Add random spin
+            // Add spin
             enemyRb.AddTorque(Random.insideUnitSphere * 5f, ForceMode.Impulse);
         }
         
-        Debug.Log($"Confetti Rocket: Hit and launched {enemy.name}!");
-        
-        // Start explosion countdown
+        // Explode after delay
         StartCoroutine(ExplodeAfterDelay());
     }
     
     System.Collections.IEnumerator ExplodeAfterDelay()
     {
         yield return new WaitForSeconds(explosionDelay);
-        Explode(attachedEnemy);
+        Explode();
     }
     
-    void Explode(GameObject enemy)
+    void Explode()
     {
-        // Play explosion sound
-        if (explosionSound != null)
-        {
-            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
-        }
+        Debug.Log("💥 CONFETTI EXPLOSION!");
         
         // Spawn explosion effect
         if (explosionEffect != null)
@@ -128,10 +107,10 @@ public class ConfettiRocketProjectile : MonoBehaviour
             Destroy(explosion, 3f);
         }
         
-        // Destroy enemy
-        if (enemy != null)
+        // Kill the enemy
+        if (attachedEnemy != null)
         {
-            Destroy(enemy);
+            Destroy(attachedEnemy);
         }
         
         // Destroy rocket

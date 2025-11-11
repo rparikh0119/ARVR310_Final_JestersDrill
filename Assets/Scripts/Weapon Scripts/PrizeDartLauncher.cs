@@ -8,7 +8,7 @@ public class PrizeDartLauncher : MonoBehaviour
     public GameObject dartPrefab;
     public Transform muzzlePoint;
     public float dartSpeed = 30f;
-    public float fireRate = 0.4f; // Fast fire rate
+    public float fireRate = 0.4f;
     private float nextFireTime = 0f;
     
     [Header("Visual Effects")]
@@ -33,24 +33,28 @@ public class PrizeDartLauncher : MonoBehaviour
     
     void Start()
     {
+        Debug.Log($"[PrizeDartLauncher] Start() called on {gameObject.name}");
+        
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
+        {
             audioSource = gameObject.AddComponent<AudioSource>();
-        
+        }
         audioSource.spatialBlend = 1f;
         
         if (muzzleLight != null)
+        {
             muzzleLight.enabled = false;
+        }
+        
+        StartCoroutine(FindControllerDelayed());
     }
     
     void OnEnable()
     {
-        // Only initialize if we're in play mode (not during scene load)
+        // Only enable if we're in play mode and action is valid
         if (!Application.isPlaying) return;
         
-        StartCoroutine(FindControllerDelayed());
-        
-        // Enable the activate action (safely)
         try
         {
             if (activateAction.action != null)
@@ -75,17 +79,7 @@ public class PrizeDartLauncher : MonoBehaviour
     System.Collections.IEnumerator FindControllerDelayed()
     {
         yield return new WaitForSeconds(0.1f);
-        
         controllerInteractor = GetComponentInParent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInputInteractor>();
-        
-        if (controllerInteractor == null)
-        {
-            Debug.LogWarning("PrizeDartLauncher: Could not find XRBaseControllerInteractor in parent!");
-        }
-        else
-        {
-            Debug.Log("PrizeDartLauncher: Found controller, ready to shoot darts!");
-        }
     }
     
     void Update()
@@ -106,7 +100,8 @@ public class PrizeDartLauncher : MonoBehaviour
     
     public void Shoot()
     {
-        // Check fire rate cooldown
+        Debug.Log($"[PrizeDartLauncher] Shoot() - Time: {Time.time}");
+        
         if (Time.time < nextFireTime)
         {
             if (emptyClickSound != null && audioSource != null)
@@ -116,50 +111,40 @@ public class PrizeDartLauncher : MonoBehaviour
             return;
         }
         
-        // FIRE THE DART
         if (dartPrefab != null && muzzlePoint != null)
         {
             GameObject dart = Instantiate(dartPrefab, muzzlePoint.position, muzzlePoint.rotation);
             
-            // Add velocity to dart
             Rigidbody rb = dart.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.linearVelocity = muzzlePoint.forward * dartSpeed;
             }
             
-            Debug.Log("PrizeDartLauncher: Fired dart!");
+            Debug.Log("[PrizeDartLauncher] ✅ Dart fired!");
         }
         else
         {
-            Debug.LogError("PrizeDartLauncher: Missing dartPrefab or muzzlePoint!");
+            Debug.LogError("[PrizeDartLauncher] ❌ Missing dartPrefab or muzzlePoint!");
         }
         
-        // Play shoot sound
         if (shootSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(shootSound);
         }
         
-        // Visual effects
-        if (muzzleFlash != null)
-        {
-            muzzleFlash.Play();
-        }
+        if (muzzleFlash != null) muzzleFlash.Play();
         
-        // Muzzle light
         if (muzzleLight != null)
         {
             StartCoroutine(FlashLight());
         }
         
-        // Haptic feedback
         if (controllerInteractor != null)
         {
             controllerInteractor.SendHapticImpulse(hapticIntensity, hapticDuration);
         }
         
-        // Set next fire time
         nextFireTime = Time.time + fireRate;
     }
     

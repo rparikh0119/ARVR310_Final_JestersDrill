@@ -4,86 +4,76 @@ using System.Collections;
 public class WeaponManager : MonoBehaviour
 {
     [Header("Weapon Prefabs")]
-    public GameObject[] weaponPrefabs; // Array of all your weapons
+    public GameObject[] weaponPrefabs;
     
     [Header("Weapon Attachment")]
-    public Transform weaponAttachPoint; // Right hand controller
+    public Transform weaponAttachPoint;
     
     [Header("Current Weapon")]
     public int currentWeaponIndex = 0;
     private GameObject currentWeaponInstance;
     
-    [Header("Auto-Equip Settings")]
-    public bool autoEquipOnStart = false; // Temporarily disabled to debug scene loading
-    public float autoEquipDelay = 0.5f;
-    
     void Start()
     {
-        // Only auto-equip if enabled and we have valid references
-        if (autoEquipOnStart && weaponPrefabs.Length > 0 && weaponAttachPoint != null)
-        {
-            // Use Invoke to delay without blocking
-            Invoke(nameof(AutoEquipFirstWeapon), autoEquipDelay);
-        }
-        else if (autoEquipOnStart)
-        {
-            if (weaponPrefabs.Length == 0)
-            {
-                Debug.LogWarning("WeaponManager: No weapons assigned in weaponPrefabs array! Auto-equip disabled.");
-            }
-            if (weaponAttachPoint == null)
-            {
-                Debug.LogWarning("WeaponManager: weaponAttachPoint is not assigned! Auto-equip disabled.");
-            }
-        }
-    }
-    
-    void AutoEquipFirstWeapon()
-    {
-        if (weaponPrefabs.Length > 0 && weaponAttachPoint != null)
+        // Auto-equip first weapon at start
+        if (weaponPrefabs.Length > 0)
         {
             EquipWeapon(0);
+        }
+        else
+        {
+            Debug.LogError("WeaponManager: No weapons assigned!");
         }
     }
     
     // PUBLIC - Called by UI buttons
     public void EquipWeapon(int weaponIndex)
     {
-        // Safety checks
-        if (weaponAttachPoint == null)
-        {
-            Debug.LogError("WeaponManager: Cannot equip weapon - weaponAttachPoint is null!");
-            return;
-        }
-        
+        // Validation
         if (weaponIndex < 0 || weaponIndex >= weaponPrefabs.Length)
         {
-            Debug.LogError($"WeaponManager: Invalid weapon index {weaponIndex}!");
+            Debug.LogError($"Invalid weapon index: {weaponIndex}");
             return;
         }
         
-        if (weaponPrefabs[weaponIndex] == null)
+        // If trying to equip the same weapon, ignore
+        if (currentWeaponIndex == weaponIndex && currentWeaponInstance != null)
         {
-            Debug.LogError($"WeaponManager: Weapon prefab at index {weaponIndex} is null!");
+            Debug.Log("Same weapon already equipped, ignoring");
             return;
         }
         
-        // Destroy current weapon if one exists
+        // Use coroutine to prevent freezing during instantiation
+        StartCoroutine(EquipWeaponAsync(weaponIndex));
+    }
+    
+    private IEnumerator EquipWeaponAsync(int weaponIndex)
+    {
+        // Destroy current weapon
         if (currentWeaponInstance != null)
         {
             Destroy(currentWeaponInstance);
+            currentWeaponInstance = null;
+            // Yield to allow frame update after destroy
+            yield return null;
         }
         
         // Spawn new weapon as child of right hand
+        // This can be slow for complex prefabs, so we yield after
         currentWeaponInstance = Instantiate(weaponPrefabs[weaponIndex], weaponAttachPoint);
         
-        // Reset position and rotation to match hand exactly
-        currentWeaponInstance.transform.localPosition = Vector3.zero;
-        currentWeaponInstance.transform.localRotation = Quaternion.identity;
-        
-        // Update index
+        // Yield to allow frame update after instantiation
+        yield return null;
+
+        // Reset position only - KEEP prefab's rotation
+        if (currentWeaponInstance != null)
+        {
+            currentWeaponInstance.transform.localPosition = Vector3.zero;
+            // ✅ REMOVED the localRotation line - let prefab keep its Y=180 rotation!
+        }
+
         currentWeaponIndex = weaponIndex;
         
-        Debug.Log($"Equipped weapon: {weaponPrefabs[weaponIndex].name}");
+        Debug.Log($"✅ Equipped weapon: {weaponPrefabs[weaponIndex].name}");
     }
 }
