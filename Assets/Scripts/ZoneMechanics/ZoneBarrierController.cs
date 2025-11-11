@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class ZoneBarrierManager : MonoBehaviour
@@ -32,11 +33,24 @@ public class ZoneBarrierManager : MonoBehaviour
             zoneUnlocked[i] = false;
         }
         
-        // All barriers invisible initially
+        // Use coroutine to avoid blocking - disable barriers after scene loads
+        StartCoroutine(DisableBarriersDelayed());
+    }
+    
+    System.Collections.IEnumerator DisableBarriersDelayed()
+    {
+        // Wait for scene to fully load
+        yield return new WaitForEndOfFrame();
+        yield return null;
+        
+        // All barriers invisible initially (do this after scene load to avoid blocking)
         foreach (GameObject barrier in zoneBarriers)
         {
             if (barrier != null)
+            {
                 barrier.SetActive(false);
+                yield return null; // Yield between each barrier to avoid blocking
+            }
         }
     }
 

@@ -28,7 +28,7 @@
                     "name": "Is Tracked",
                     "type": "Button",
                     "id": "6bb4e248-e42b-47c3-b66c-79566508ca74",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -350,7 +350,7 @@
                     "name": "Is Tracked",
                     "type": "Button",
                     "id": "82eb6741-beef-48d3-83ab-a957dc1caa1e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1294,24 +1294,6 @@
             "id": "22336389-9fb1-4c2c-8635-0ed30db0d29e",
             "actions": [
                 {
-                    "name": "Teleport Mode",
-                    "type": "Value",
-                    "id": "a21db72c-4843-4839-b4d0-3ce8d287cb86",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Teleport Mode Cancel",
-                    "type": "Button",
-                    "id": "89ce8348-6001-41a3-85b9-f8f2e2dcad7c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Turn",
                     "type": "Value",
                     "id": "9164e093-ebd4-4923-af32-1b52f31c2d66",
@@ -1349,28 +1331,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "8da6ed3a-f621-49fe-8c76-1f6b7d7754d6",
-                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
-                    "interactions": "Sector(directions=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Teleport Mode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b8aebee7-fa03-43d4-bfb7-77a3f87452cc",
-                    "path": "<XRController>{LeftHand}/{GripButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Teleport Mode Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "99cb7ad1-51ec-4611-af68-92a85f2c17d6",
@@ -2387,24 +2347,6 @@
             "id": "99ce76d3-82c5-4289-9670-2ecffa6833fd",
             "actions": [
                 {
-                    "name": "Teleport Mode",
-                    "type": "Value",
-                    "id": "a6c7231d-c55d-4dd4-9e87-877bb5522ef5",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Teleport Mode Cancel",
-                    "type": "Button",
-                    "id": "d587b60c-39a0-4365-8075-477ce484ba0f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Turn",
                     "type": "Value",
                     "id": "9fb2eb2b-2fb6-4328-8167-10a1bf11b424",
@@ -2451,28 +2393,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "62690862-4688-4010-975b-b3d9c6062157",
-                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
-                    "interactions": "Sector(directions=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Teleport Mode",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "de466e6e-12bf-46a1-b0fd-ffbc343f3399",
-                    "path": "<XRController>{RightHand}/{GripButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Teleport Mode Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "d6c08c3d-3d41-4695-994d-1ac9016a5a9e",
@@ -3396,54 +3316,6 @@
                     "action": "Spawn Object",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "BubbleGun",
-            "id": "768bcf4e-c5ac-412a-8ea1-7b6edff98735",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "c529be38-c3f8-4afd-8649-d6d4662d33bb",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "b3485da4-4692-4b8a-8387-23b77aeb59b9",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "bc11913d-3e2f-402a-a50f-65c1fc8a9634",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ababe1cd-c83f-4005-a21e-5e4d28a162c4",
-                    "path": "<XRController>{RightHand}/triggerPressed",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

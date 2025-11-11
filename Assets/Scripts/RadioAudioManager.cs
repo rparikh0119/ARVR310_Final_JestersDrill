@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class RadioBriefingManager : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class RadioBriefingManager : MonoBehaviour
 
     void Start()
     {
+        // Use coroutine to avoid blocking
+        StartCoroutine(InitializeRadioDelayed());
+    }
+    
+    System.Collections.IEnumerator InitializeRadioDelayed()
+    {
+        // Wait for scene to load
+        yield return null;
+        
         audioSource = GetComponent<AudioSource>();
         
         if (audioSource == null)

@@ -3186,19 +3186,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 199671330}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 347532402}
-        m_TargetAssemblyTypeName: LobbyMenuManager, Assembly-CSharp
-        m_MethodName: ShowPage3
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &199671330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8348,7 +8336,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5905265520191304700, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 5905265521136935270, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8407,13 +8395,10 @@ PrefabInstance:
       value: Door Wall Opaque Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 982833929023752261, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
-    - {fileID: 1097768415703694084, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
-    - {fileID: 1097768415827320116, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
-    - {fileID: 863668293980923977, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
-    - {fileID: 5473058030976516087, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
     - {fileID: 1747506793143409192, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
+    - {fileID: 5473058030976516087, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
     - {fileID: 4918469559090049355, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
+    - {fileID: 7965875444391392422, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5991902950443309428, guid: 789f116ab47ee444782f02eb7ca59fc5, type: 3}
     m_AddedGameObjects:
@@ -10958,19 +10943,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 922044560}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 347532402}
-        m_TargetAssemblyTypeName: LobbyMenuManager, Assembly-CSharp
-        m_MethodName: StartMission
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &922044560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12472,7 +12445,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3199997
+      value: 8.166
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12480,11 +12453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.254
+      value: -7.888
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071452
+      value: 0.7000406
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12492,7 +12465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70706844
+      value: -0.7141031
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalRotation.z
@@ -12504,24 +12477,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.994
+      value: -91.139
       objectReference: {fileID: 0}
     - target: {fileID: 655973916922453932, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1594675357355835815, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.162
-      objectReference: {fileID: 0}
     - target: {fileID: 5809895180613586317, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
       propertyPath: m_Name
       value: XR Origin (VR)
       objectReference: {fileID: 0}
-    - target: {fileID: 7156025964644626413, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 1438727611}
+    - target: {fileID: 5809895180613586317, guid: ebaa86c1af3588249bd536dd32367a83, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12935,19 +12904,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1153746306}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 347532402}
-        m_TargetAssemblyTypeName: LobbyMenuManager, Assembly-CSharp
-        m_MethodName: ShowEquipmentPanels
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1153746306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14493,7 +14450,7 @@ Transform:
   m_GameObject: {fileID: 1270762187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.732, y: 1.028, z: -8.05}
+  m_LocalPosition: {x: 6.807, y: 1.028, z: -8.05}
   m_LocalScale: {x: 1, y: 1.9081, z: 1.5198}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15344,6 +15301,7 @@ PrefabInstance:
     - {fileID: 3032699916929096591, guid: a9a6f5be72b97314fa21fa4b32dc5357, type: 3}
     - {fileID: 4973683230597459643, guid: a9a6f5be72b97314fa21fa4b32dc5357, type: 3}
     - {fileID: 7173234474722259817, guid: a9a6f5be72b97314fa21fa4b32dc5357, type: 3}
+    - {fileID: 8086593084485813853, guid: a9a6f5be72b97314fa21fa4b32dc5357, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9a6f5be72b97314fa21fa4b32dc5357, type: 3}
@@ -16839,7 +16797,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.32
+      value: 8.166
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16847,11 +16805,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.254
+      value: -7.888
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071452
+      value: 0.7000406
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -16859,7 +16817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70706844
+      value: -0.7141031
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -16871,7 +16829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -89.994
+      value: -91.139
       objectReference: {fileID: 0}
     - target: {fileID: 1117379863880732537, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -16886,17 +16844,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
---- !u!114 &1438727611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5495189959038074788, guid: d87001ce577b7204a8d6e5ee49cbf09d, type: 3}
-  m_PrefabInstance: {fileID: 1438727610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.XRInteractionManager
 --- !u!1 &1457862805
 GameObject:
   m_ObjectHideFlags: 0
@@ -19145,7 +19092,7 @@ Transform:
   m_GameObject: {fileID: 1643438042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.167, y: 1.028, z: -8.05}
+  m_LocalPosition: {x: 8.159, y: 1.028, z: -8.05}
   m_LocalScale: {x: 1, y: 1.9081, z: 1.5198}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23458,19 +23405,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2023671474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 347532402}
-        m_TargetAssemblyTypeName: LobbyMenuManager, Assembly-CSharp
-        m_MethodName: ShowPage2
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2023671474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24367,8 +24302,8 @@ SceneRoots:
   - {fileID: 1542304402}
   - {fileID: 1709174086}
   - {fileID: 487638648}
-  - {fileID: 220121274}
   - {fileID: 1643438046}
+  - {fileID: 220121274}
   - {fileID: 1270762191}
   - {fileID: 1195323377}
   - {fileID: 790238150}

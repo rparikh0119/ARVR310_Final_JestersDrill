@@ -46,11 +46,22 @@ public class ConfettiRocketLauncher : MonoBehaviour
     
     void OnEnable()
     {
+        // Only initialize if we're in play mode (not during scene load)
+        if (!Application.isPlaying) return;
+        
         StartCoroutine(FindControllerDelayed());
         
-        if (activateAction.action != null)
+        // Enable the activate action (safely)
+        try
         {
-            activateAction.action.Enable();
+            if (activateAction.action != null)
+            {
+                activateAction.action.Enable();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"ConfettiRocketLauncher: Could not enable input action: {e.Message}");
         }
     }
     

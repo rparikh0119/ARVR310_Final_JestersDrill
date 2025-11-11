@@ -49,11 +49,24 @@ public class LobbyMenuManager : MonoBehaviour
         PlaySound(panelTransitionSound);
     }
     
-      public void ShowPage3()
+    public void ShowPage3()
     {
         panel_Page1.SetActive(false);
         panel_Page2.SetActive(false);
         panel_Page3.SetActive(true);
+        HideAllEquipmentPanels(); // Keep equipment hidden until NEXT clicked on Page 3
+        
+        PlaySound(panelTransitionSound);
+    }
+    
+    // === EQUIPMENT PANELS ===
+    
+    public void ShowEquipmentPanels()
+    {
+        // Hide all full-size panels
+        panel_Page1.SetActive(false);
+        panel_Page2.SetActive(false);
+        panel_Page3.SetActive(false);
         
         // Show equipment cards with cascade effect
         StartCoroutine(ShowEquipmentPanelsWithDelay());
@@ -61,19 +74,6 @@ public class LobbyMenuManager : MonoBehaviour
         PlaySound(equipmentCardsSound);
     }
     
-    // === EQUIPMENT PANELS ===
-    
-    void ShowAllEquipmentPanels()
-    {
-        foreach (GameObject panel in equipmentPanels)
-        {
-            if (panel != null)
-            {
-                panel.SetActive(true);
-            }
-        }
-    }
-
     void HideAllEquipmentPanels()
     {
         foreach (GameObject panel in equipmentPanels)
@@ -85,7 +85,7 @@ public class LobbyMenuManager : MonoBehaviour
         }
     }
     
- IEnumerator ShowEquipmentPanelsWithDelay()
+    IEnumerator ShowEquipmentPanelsWithDelay()
     {
         foreach (GameObject panel in equipmentPanels)
         {
@@ -103,13 +103,40 @@ public class LobbyMenuManager : MonoBehaviour
     {
         PlaySound(startButtonSound);
         
-        // Add small delay for sound to play
-        Invoke("LoadCarnivalScene", 0.5f);
+        // Use coroutine for async loading
+        StartCoroutine(LoadCarnivalSceneAsync());
     }
     
-    void LoadCarnivalScene()
+    IEnumerator LoadCarnivalSceneAsync()
     {
-        SceneManager.LoadScene(carnivalSceneName);
+        // Wait for button sound to finish
+        yield return new WaitForSeconds(0.5f);
+        
+        // Use ASYNC loading to prevent freeze
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(carnivalSceneName);
+        
+        // Optional: Prevent scene from activating immediately
+        asyncLoad.allowSceneActivation = false;
+        
+        // Wait until scene is 90% loaded
+        while (asyncLoad.progress < 0.9f)
+        {
+            yield return null;
+        }
+        
+        // Small delay before activation
+        yield return new WaitForSeconds(0.1f);
+        
+        // Activate the scene
+        asyncLoad.allowSceneActivation = true;
+        
+        // Wait until fully loaded
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        
+        Debug.Log("Carnival scene loaded successfully!");
     }
     
     // === AUDIO ===
@@ -122,4 +149,3 @@ public class LobbyMenuManager : MonoBehaviour
         }
     }
 }
-

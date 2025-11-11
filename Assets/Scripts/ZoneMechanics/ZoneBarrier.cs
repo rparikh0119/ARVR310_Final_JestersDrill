@@ -28,6 +28,15 @@ public class ZoneBarrier : MonoBehaviour
 
     void Start()
     {
+        // Use coroutine to avoid blocking - material access can be expensive
+        StartCoroutine(InitializeBarrierDelayed());
+    }
+    
+    System.Collections.IEnumerator InitializeBarrierDelayed()
+    {
+        // Wait for scene to load
+        yield return null;
+        
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null)
         {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ClownChasePlayer : MonoBehaviour
 {
@@ -14,10 +15,8 @@ public class ClownChasePlayer : MonoBehaviour
 
     void Start()
     {
-        // Find player
-        GameObject xrOrigin = GameObject.Find("XR Origin");
-        if (xrOrigin != null)
-            player = xrOrigin.transform;
+        // Find player - use coroutine to avoid blocking scene load
+        StartCoroutine(FindPlayerDelayed());
         
         animator = GetComponent<Animator>();
         
@@ -29,6 +28,29 @@ public class ClownChasePlayer : MonoBehaviour
             controller.height = 2f;
             controller.radius = 0.5f;
             controller.center = new Vector3(0, 1, 0);
+        }
+    }
+    
+    System.Collections.IEnumerator FindPlayerDelayed()
+    {
+        // Wait for scene to fully load
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
+        
+        // Try to find player
+        GameObject xrOrigin = GameObject.Find("XR Origin");
+        if (xrOrigin != null)
+        {
+            player = xrOrigin.transform;
+        }
+        else
+        {
+            // Try alternative: find by tag
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
         }
     }
 

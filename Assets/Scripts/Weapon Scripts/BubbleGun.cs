@@ -45,13 +45,23 @@ public class BubbleGun : MonoBehaviour
     
     void OnEnable()
     {
+        // Only initialize if we're in play mode (not during scene load)
+        if (!Application.isPlaying) return;
+        
         // Find the controller when weapon is equipped
         StartCoroutine(FindControllerDelayed());
         
-        // Enable the activate action
-        if (activateAction.action != null)
+        // Enable the activate action (safely)
+        try
         {
-            activateAction.action.Enable();
+            if (activateAction.action != null)
+            {
+                activateAction.action.Enable();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"BubbleGun: Could not enable input action: {e.Message}");
         }
     }
     

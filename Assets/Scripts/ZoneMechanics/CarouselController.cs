@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CarouselController : MonoBehaviour
 {
@@ -20,10 +21,30 @@ public class CarouselController : MonoBehaviour
             Debug.LogError("Couldn't find Rotate_01! Make sure it's a child of this GameObject.");
         }
 
-        // Auto-find all cranks (searches all children)
-        cranks = GetComponentsInChildren<Transform>();
+        // Auto-find all cranks - use coroutine to avoid blocking
+        StartCoroutine(FindCranksDelayed());
+    }
+    
+    System.Collections.IEnumerator FindCranksDelayed()
+    {
+        // Wait a frame to avoid blocking scene load
+        yield return null;
         
-        Debug.Log($"Carousel initialized with {cranks.Length} transforms");
+        // Find only Transform components (not all components)
+        Transform[] allTransforms = GetComponentsInChildren<Transform>();
+        System.Collections.Generic.List<Transform> crankList = new System.Collections.Generic.List<Transform>();
+        
+        // Filter to only cranks
+        foreach (Transform t in allTransforms)
+        {
+            if (t.name.Contains("Crank"))
+            {
+                crankList.Add(t);
+            }
+        }
+        
+        cranks = crankList.ToArray();
+        Debug.Log($"Carousel initialized with {cranks.Length} cranks");
     }
 
     void Update()

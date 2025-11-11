@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class WristUIManager : MonoBehaviour
 {
@@ -11,9 +12,6 @@ public class WristUIManager : MonoBehaviour
     [Header("Weapon Manager")]
     public WeaponManager weaponManager;
     
-    [Header("Night Vision")]
-    public NightVisionController nightVisionController;
-    
     [Header("Radio Audio")]
     public AudioSource radioAudioSource;
     public AudioClip sergeantBriggsWeaponInstructions;
@@ -24,6 +22,15 @@ public class WristUIManager : MonoBehaviour
     
     void Start()
     {
+        // Use coroutine to avoid blocking scene load
+        StartCoroutine(InitializeUIDelayed());
+    }
+    
+    System.Collections.IEnumerator InitializeUIDelayed()
+    {
+        // Wait for scene to fully load
+        yield return new WaitForEndOfFrame();
+        
         // Start with only small menu visible
         ShowSmallMenu();
     }
@@ -118,20 +125,6 @@ public class WristUIManager : MonoBehaviour
     }
     
     // ===== EQUIPMENT TOGGLES =====
-    
-    public void ToggleNightVision()
-    {
-        if (nightVisionController != null)
-        {
-            nightVisionController.ToggleNightVision();
-            PlayButtonSound();
-            Debug.Log("Toggled Night Vision");
-        }
-        else
-        {
-            Debug.LogError("NightVisionController reference missing!");
-        }
-    }
     
     public void PlayRadioInstructions()
     {
