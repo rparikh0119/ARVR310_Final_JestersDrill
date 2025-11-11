@@ -46,13 +46,13 @@ public class ZoneBarrierManager : MonoBehaviour
         {
             if (zoneBarriers[i] != null)
             {
-                // Zone 1 active, others hidden
-                zoneBarriers[i].SetActive(zoneUnlocked[i]);
+                // ✅ FIXED: Barriers active when zones LOCKED, inactive when UNLOCKED
+                zoneBarriers[i].SetActive(!zoneUnlocked[i]);
                 yield return null;
             }
         }
         
-        Debug.Log("✅ Zone barriers initialized. Zone 1 is active!");
+        Debug.Log("✅ Zone barriers initialized. Zone 1 barrier hidden, others active!");
     }
 
     public void UnlockZone(int zoneNumber)
@@ -63,12 +63,13 @@ public class ZoneBarrierManager : MonoBehaviour
         {
             zoneUnlocked[index] = true;
             
+            // ✅ FIXED: When zone unlocks, barrier should become INACTIVE
             if (zoneBarriers[index] != null)
             {
-                zoneBarriers[index].SetActive(true);
+                zoneBarriers[index].SetActive(false);
             }
             
-            Debug.Log($"Zone {zoneNumber} unlocked! Barrier now active.");
+            Debug.Log($"Zone {zoneNumber} unlocked! Barrier now hidden.");
         }
     }
 

@@ -252,8 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9257637b82bfee5428b06387e304f680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BumperCarController
-  rotationSpeed: 30
-  isRunning: 1
   bumperCars:
   - {fileID: 7604365274834321433}
   - {fileID: 983770971657552277}
@@ -261,6 +259,12 @@ MonoBehaviour:
   - {fileID: 3401215322852007484}
   - {fileID: 65018516801941905}
   - {fileID: 6279634109733444377}
+  rotationSpeed: 30
+  movementRadius: 2
+  movementSpeed: 1
+  isRunning: 1
+  rideAmbientSound: {fileID: 0}
+  audioVolume: 0.5
 --- !u!1 &4000384628338645189
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +671,8 @@ MonoBehaviour:
   - {fileID: 4671913018932134875}
   rideSpeed: 28.5
   isRunning: 1
+  rideAmbientSound: {fileID: 0}
+  audioVolume: 0.5
 --- !u!1 &7608808149122187405
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,9 +5643,6 @@ PrefabInstance:
       addedObject: {fileID: 3900630558940820308}
     - targetCorrespondingSourceObject: {fileID: 5697964640565668873, guid: 72eeeabfb5174fc429415a11fdb3609f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4346079993479710909}
-    - targetCorrespondingSourceObject: {fileID: 5697964640565668873, guid: 72eeeabfb5174fc429415a11fdb3609f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8702569928190220450}
     - targetCorrespondingSourceObject: {fileID: 5697964640565668873, guid: 72eeeabfb5174fc429415a11fdb3609f, type: 3}
       insertIndex: -1
@@ -5809,29 +5812,6 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
---- !u!136 &4346079993479710909
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5211572499042914432}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05
-  m_Height: 0.3
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.47962445, z: -9.313226e-10}
 --- !u!114 &8702569928190220450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5845,8 +5825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneratorLeverController
   requiredPushes: 3
-  pushAnimationDistance: 0.2
-  pushAnimationSpeed: 5
+  pushThreshold: -0.15
   pushSound: {fileID: 8300000, guid: 6f6cce0d06a63e54caca8dccf3043294, type: 3}
   finalPushSound: {fileID: 0}
   onLeverPushed:
@@ -7438,6 +7417,8 @@ MonoBehaviour:
   - {fileID: 7258793124010486382}
   rideSpeed: 25.7
   isRunning: 1
+  rideAmbientSound: {fileID: 0}
+  audioVolume: 0.5
 --- !u!4 &7258793124010486382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4380674677014153320, guid: 68bc1c28f5558be47b6c6a03509cfb31, type: 3}
