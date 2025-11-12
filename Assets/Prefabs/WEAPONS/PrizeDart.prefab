@@ -265,11 +265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d954c5a47dd0a24c973b14855d2dcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrizeDart
+  speed: 30
+  lifetime: 5
   pinDuration: 3
   hitLayers:
     serializedVersion: 2
     m_Bits: 64
-  pinEffect: {fileID: 0}
-  trail: {fileID: 9218445669154420003}
   hitSound: {fileID: 0}
   pinSound: {fileID: 0}

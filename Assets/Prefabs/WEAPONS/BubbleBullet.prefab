@@ -155,40 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BubbleBullet
   speed: 15
   lifetime: 5
-  speedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: -0.19999999
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.8
-      inSlope: -0.19999999
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  wobbleSpeed: 5
-  wobbleAmount: 0.05
   bubblePrefab: {fileID: 7483132471648855561, guid: 637e0fad98f99194ebcb79a51dafe8b2, type: 3}
-  bubbleableLayers:
+  bubbleableLayer:
     serializedVersion: 2
     m_Bits: 128
-  shootSound: {fileID: 8300000, guid: 1e3d21afbc63f874e8ab1b1e05b44cff, type: 3}
-  hitSound: {fileID: 8300000, guid: cfd4de3bab9e0d746b39b69964ffa8c7, type: 3}
-  trailEffect: {fileID: 0}
-  hitEffect: {fileID: 0}
 --- !u!82 &2954748259677912308
 AudioSource:
   m_ObjectHideFlags: 0

@@ -143,43 +143,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bubble
   bubbleDuration: 5
+  floatForce: 15
   floatSpeed: 2
-  driftSpeed: 0.5
-  floatCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  wobbleSpeed: 2
-  wobbleAmount: 0.1
-  spinSpeed: 30
-  expandDuration: 0.5
-  whatPopsMe:
-    serializedVersion: 2
-    m_Bits: 0
-  popEffect: {fileID: 0}
+  bobSpeed: 2
+  bobAmount: 0.3
+  popDuration: 0.5
   bubbleCreateSound: {fileID: 0}
   bubbleFloatSound: {fileID: 0}
   bubblePopSound: {fileID: 0}
+  popEffect: {fileID: 0}
 --- !u!82 &6127876568092941008
 AudioSource:
   m_ObjectHideFlags: 0
@@ -299,8 +271,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

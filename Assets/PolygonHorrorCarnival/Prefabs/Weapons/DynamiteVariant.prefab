@@ -64,7 +64,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: DynamiteVariant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 54780955, guid: 2c1c26f8adc30bc45a3eb3de5459c835, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

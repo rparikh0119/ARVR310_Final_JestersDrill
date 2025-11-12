@@ -1,116 +1,262 @@
 using UnityEngine;
+using System.Collections;
 
 public class ConfettiRocketProjectile : MonoBehaviour
 {
-    [Header("Movement")]
-    public float speed = 25f;
-    public float lifetime = 5f;
-    
     [Header("Rocket Settings")]
-    public float explosionDelay = 0.5f; // Time before explosion after hit
-    public float launchForce = 15f; // How high enemy flies
-    public LayerMask enemyLayer; // Set to "Enemy" layer
+    public float explosionDelay = 2f;
+    public float launchForce = 15f;
+    public LayerMask hitLayers; // SET TO "Enemy" AND "Default"
     
     [Header("Visual Effects")]
     public ParticleSystem rocketTrail;
     public GameObject explosionEffect;
     
-    private Vector3 velocity;
+    [Header("Audio")]
+    public AudioClip hitSound;
+    public AudioClip explosionSound;
+    public AudioClip rocketFlySound;
+    private AudioSource audioSource;
+    
+    [Header("Debug")]
+    public bool showDebugLogs = true;
+    
     private bool hasHit = false;
     private GameObject attachedEnemy;
+    private Rigidbody rb;
+    private Collider col;
     
     void Start()
     {
-        // Calculate velocity from forward direction
-        velocity = transform.forward * speed;
+        // Get and verify components
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
+        
+        // Setup audio
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.spatialBlend = 1f;
+        audioSource.loop = true;
+        
+        if (rocketFlySound != null)
+        {
+            audioSource.clip = rocketFlySound;
+            audioSource.Play();
+        }
+        
+        // Debug startup info
+        if (showDebugLogs)
+        {
+            Debug.Log($"🚀 CONFETTI ROCKET SPAWNED:");
+            Debug.Log($"  - Position: {transform.position}");
+            Debug.Log($"  - Velocity: {(rb != null ? rb.linearVelocity.magnitude.ToString() : "No Rigidbody!")}");
+            Debug.Log($"  - Collider Enabled: {(col != null ? col.enabled.ToString() : "No Collider!")}");
+            Debug.Log($"  - Is Trigger: {(col != null ? col.isTrigger.ToString() : "N/A")}");
+            Debug.Log($"  - Hit Layers Mask: {hitLayers.value}");
+            Debug.Log($"  - Collision Detection: {(rb != null ? rb.collisionDetectionMode.ToString() : "N/A")}");
+            
+            // Check which layers are included
+            if ((hitLayers.value & (1 << LayerMask.NameToLayer("Enemy"))) != 0)
+                Debug.Log($"  - ✅ Enemy layer included");
+            else
+                Debug.Log($"  - ❌ Enemy layer NOT included!");
+            
+            if ((hitLayers.value & (1 << LayerMask.NameToLayer("Default"))) != 0)
+                Debug.Log($"  - ✅ Default layer included");
+            else
+                Debug.Log($"  - ⚠️ Default layer NOT included");
+        }
         
         // Auto-destroy after lifetime
-        Destroy(gameObject, lifetime);
-        
-        Debug.Log($"Rocket spawned! Moving forward at speed: {speed}");
+        Destroy(gameObject, 5f);
     }
     
-    void Update()
-    {
-        if (!hasHit)
-        {
-            // Move forward
-            transform.position += velocity * Time.deltaTime;
-            
-            // Rotate for spin effect
-            transform.Rotate(Vector3.forward, 360f * Time.deltaTime);
-        }
-    }
-    
+    // TRIGGER-BASED COLLISION (for trigger colliders)
     void OnTriggerEnter(Collider other)
     {
-        if (hasHit) return;
-        
-        // Check if hit Enemy layer
-        if (((1 << other.gameObject.layer) & enemyLayer) == 0)
+        if (showDebugLogs)
         {
-            // Not an enemy - ignore
+            Debug.Log($"═══ TRIGGER ENTER DETECTED ═══");
+            Debug.Log($"  Hit Object: {other.gameObject.name}");
+            Debug.Log($"  Hit Layer: {LayerMask.LayerToName(other.gameObject.layer)} (#{other.gameObject.layer})");
+            Debug.Log($"  Is Trigger: {other.isTrigger}");
+            Debug.Log($"  Has Rigidbody: {other.attachedRigidbody != null}");
+        }
+        
+        ProcessHit(other);
+    }
+    
+    // SOLID COLLISION (backup method for non-trigger colliders)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (showDebugLogs)
+        {
+            Debug.Log($"═══ COLLISION ENTER DETECTED ═══");
+            Debug.Log($"  Hit Object: {collision.gameObject.name}");
+            Debug.Log($"  Hit Layer: {LayerMask.LayerToName(collision.gameObject.layer)} (#{collision.gameObject.layer})");
+            Debug.Log($"  Impact Force: {collision.impulse.magnitude}");
+            Debug.Log($"  Contact Points: {collision.contactCount}");
+        }
+        
+        ProcessHit(collision.collider);
+    }
+    
+    void ProcessHit(Collider other)
+    {
+        if (hasHit) 
+        {
+            if (showDebugLogs)
+                Debug.Log("  ⏭️ Already processed a hit - ignoring");
             return;
         }
         
-        hasHit = true;
+        // Check if the hit object's layer is in our hit layers mask
+        bool layerMatch = ((1 << other.gameObject.layer) & hitLayers) != 0;
         
-        Debug.Log($"Rocket hit enemy: {other.gameObject.name}");
+        if (showDebugLogs)
+        {
+            Debug.Log($"  Layer Match Check: {layerMatch}");
+            Debug.Log($"  Calculation: (1 << {other.gameObject.layer}) & {hitLayers.value} = {(1 << other.gameObject.layer) & hitLayers.value}");
+        }
         
-        // Attach to enemy and launch them
-        AttachToEnemy(other.gameObject);
+        if (layerMatch)
+        {
+            if (showDebugLogs)
+                Debug.Log("  ✅ LAYER MATCH - PROCESSING HIT");
+            
+            hasHit = true;
+            
+            // Stop rocket sound
+            if (audioSource != null)
+            {
+                audioSource.Stop();
+            }
+            
+            // Play hit sound
+            if (hitSound != null)
+            {
+                AudioSource.PlayClipAtPoint(hitSound, transform.position);
+            }
+            
+            // Check if we hit an enemy or something else
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                if (showDebugLogs)
+                    Debug.Log("  🎯 ENEMY LAYER DETECTED - LAUNCHING!");
+                
+                AttachToEnemy(other.gameObject);
+            }
+            else
+            {
+                if (showDebugLogs)
+                    Debug.Log("  💥 NON-ENEMY HIT - EXPLODING IMMEDIATELY!");
+                
+                Explode(null);
+            }
+        }
+        else
+        {
+            if (showDebugLogs)
+                Debug.Log($"  ❌ LAYER MISMATCH - Object is on '{LayerMask.LayerToName(other.gameObject.layer)}' layer");
+        }
     }
     
     void AttachToEnemy(GameObject enemy)
     {
         attachedEnemy = enemy;
         
-        // Stop rocket movement
-        velocity = Vector3.zero;
+        if (showDebugLogs)
+            Debug.Log($"🎯 ATTACHING TO ENEMY: {enemy.name}");
+        
+        // Stop rocket physics
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+            
+            if (showDebugLogs)
+                Debug.Log("  - Rocket physics stopped");
+        }
         
         // Attach rocket to enemy
         transform.SetParent(enemy.transform);
         
-        // Launch enemy upward with spin
+        if (showDebugLogs)
+            Debug.Log("  - Rocket parented to enemy");
+        
+        // LAUNCH THE ENEMY
         Rigidbody enemyRb = enemy.GetComponent<Rigidbody>();
         if (enemyRb != null)
         {
+            // Make enemy physical
             enemyRb.isKinematic = false;
             enemyRb.useGravity = true;
             
-            // Launch UP and slightly forward
+            // Calculate launch direction (up and forward)
             Vector3 launchDirection = (Vector3.up * 1.5f + transform.forward).normalized;
-            enemyRb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
             
-            // Add spin
+            // Apply launch force
+            enemyRb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
             enemyRb.AddTorque(Random.insideUnitSphere * 5f, ForceMode.Impulse);
+            
+            if (showDebugLogs)
+            {
+                Debug.Log($"  🚀 ENEMY LAUNCHED!");
+                Debug.Log($"     Direction: {launchDirection}");
+                Debug.Log($"     Force: {launchForce}");
+                Debug.Log($"     Velocity: {enemyRb.linearVelocity.magnitude}");
+            }
+        }
+        else
+        {
+            if (showDebugLogs)
+                Debug.LogWarning($"  ⚠️ Enemy '{enemy.name}' has no Rigidbody - cannot launch!");
         }
         
-        // Explode after delay
+        // Start explosion countdown
         StartCoroutine(ExplodeAfterDelay());
     }
     
-    System.Collections.IEnumerator ExplodeAfterDelay()
+    IEnumerator ExplodeAfterDelay()
     {
+        if (showDebugLogs)
+            Debug.Log($"  ⏱️ Starting {explosionDelay}s countdown to explosion...");
+        
         yield return new WaitForSeconds(explosionDelay);
-        Explode();
+        
+        if (showDebugLogs)
+            Debug.Log("  💥 EXPLODING NOW!");
+        
+        Explode(attachedEnemy);
     }
     
-    void Explode()
+    void Explode(GameObject enemy)
     {
-        Debug.Log("💥 CONFETTI EXPLOSION!");
+        if (showDebugLogs)
+            Debug.Log($"💥 CONFETTI EXPLOSION at {transform.position}");
+        
+        // Play explosion sound
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+        }
         
         // Spawn explosion effect
         if (explosionEffect != null)
         {
             GameObject explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
             Destroy(explosion, 3f);
+            
+            if (showDebugLogs)
+                Debug.Log("  - Explosion VFX spawned");
         }
         
-        // Kill the enemy
-        if (attachedEnemy != null)
+        // Destroy enemy
+        if (enemy != null)
         {
-            Destroy(attachedEnemy);
+            if (showDebugLogs)
+                Debug.Log($"  - Destroying enemy: {enemy.name}");
+            
+            Destroy(enemy);
         }
         
         // Destroy rocket
