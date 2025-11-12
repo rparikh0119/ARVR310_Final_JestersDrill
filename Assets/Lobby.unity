@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ">tOGGLE Y BUTTON\n>GREEN LIGHT \n  VIEW"
+  m_text: out of order
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
@@ -1019,8 +1019,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3908,11 +3908,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>aREA STUN
+  m_text: '>long range
 
-    >HOLD TO CHARGE
+    >3 second cooldown
 
-    >THREE POWER LEVELS'
+    >launches firework rocket'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
@@ -5014,7 +5014,7 @@ MonoBehaviour:
   panelTransitionSound: {fileID: 8300000, guid: 8a25000e3bff71448b26878d3e834819, type: 3}
   equipmentCardsSound: {fileID: 8300000, guid: 8a25000e3bff71448b26878d3e834819, type: 3}
   startButtonSound: {fileID: 8300000, guid: 30f9fdd0e6cf4ef4f92a13c4de66cc91, type: 3}
-  carnivalSceneName: Carnival
+  carnivalSceneName: Carnival_v2
 --- !u!1 &350632935
 GameObject:
   m_ObjectHideFlags: 0
@@ -5745,11 +5745,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>DISRUPTION
+  m_text: '>pins targets
 
-    >ATTACH MODE
+    >freeze distance
 
-    >LAUNCH MODE'
+    >3 second cooldown'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
@@ -14363,7 +14363,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: ad05b72c7ba36604c99effc0114da65c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 50bf7d3ead581d449ac1a12b9e7a0771, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -14461,7 +14461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4530908a7dde4cb23f38c20780976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SargeantAudioTrigger
-  welcomeAudio: {fileID: 8300000, guid: ad05b72c7ba36604c99effc0114da65c, type: 3}
+  welcomeAudio: {fileID: 8300000, guid: 50bf7d3ead581d449ac1a12b9e7a0771, type: 3}
   audioSource: {fileID: 1270762188}
 --- !u!65 &1270762190
 BoxCollider:
@@ -14670,7 +14670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '> INVESTIGATE FIVE ZONES
+  m_text: '> INVESTIGATE FOUR ZONES
 
     > NEUTRALIZE THREATS
 
@@ -21747,16 +21747,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '>bUMPER CARS
+  m_text: '>Carousel
 
     >FERRIS WHEEL
 
-    >CIRCUS TENT
+    >bumper cars
 
-    >PSYCHIC CART
+    >teacups
 
-    >HAUNTED
-    HOUSE'
+    >swings'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
@@ -22998,7 +22997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: COLLECT ALL TOOLS AND WEAPONS FROM THE LEFT TABLE
+  m_text: let the games begin rookie!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
@@ -23986,7 +23985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FIREWORK LAUNCHER
+  m_text: Dart Launcher
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
   m_sharedMaterial: {fileID: 5085870836654340761, guid: 3d4d795cbbad8c343b174f9d51d50102, type: 2}
